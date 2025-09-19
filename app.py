@@ -25,7 +25,16 @@ if uploaded_file is not None:
     byte_im = buf.getvalue()                    # バイト列データを取得
 
     # ===== FastAPI のエンドポイントURL =====
-    api_url = "http://127.0.0.1:8000/predict"  # backend.py の /predict に送信
+    # api_url = "http://127.0.0.1:8000/predict"  # backend.py の /predict に送信
+    # api_url = "https://waste-backend-6cn4.onrender.com" 
+    import os
+
+    # Render上かローカルかで切り替え
+    if os.getenv("RENDER") == "1":
+        backend_url = "https://<your-backend>.onrender.com/predict"
+    else:
+        backend_url = "http://127.0.0.1:8000/predict"
+
     files = {"file": ("image.png", byte_im, "image/png")}  # 送信データの形式を指定
 
     # ===== 送信中のスピナー表示 =====
