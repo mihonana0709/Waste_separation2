@@ -31,7 +31,7 @@ if uploaded_file is not None:
 
     # Render上かローカルかで切り替え
     if os.getenv("RENDER") == "1":
-        backend_url = "https://<your-backend>.onrender.com/predict"
+        backend_url = "https://waste-backend-6cn4.onrender.com"
     else:
         backend_url = "http://127.0.0.1:8000/predict"
 
