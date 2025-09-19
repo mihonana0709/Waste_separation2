@@ -40,7 +40,8 @@ if uploaded_file is not None:
     # ===== 送信中のスピナー表示 =====
     with st.spinner("判定中..."):               # 処理中のスピナーを表示
         try:
-            response = requests.post(api_url, files=files)  # POSTリクエストで画像送信
+            # response = requests.post(api_url, files=files)  # POSTリクエストで画像送信
+            response = requests.post(backend_url, files=files)
             result = response.json()                         # JSON形式で結果取得
             st.success(f"予測結果: {result['prediction']}") # 予測結果を画面に表示
         except Exception as e:                                # エラー処理
