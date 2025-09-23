@@ -76,27 +76,11 @@ if uploaded_file is not None:
             # response = requests.post(api_url, files=files)  # POSTリクエストで画像送信
             response = requests.post(backend_url, files=files)
             result = response.json()                         # JSON形式で結果取得
-
-            # st.write("ステータスコード:", response.status_code)
-            # st.write("レスポンス内容:", response.text)
-
-            prediction = result['prediction']  # ← ここで prediction を定義
-            confidence = result['probability']      # 0.9876 などの float 値
-            # probability = result.get("probability", None)
-            # st.success(f"予測結果: {result['prediction']}") # 予測結果を画面に表示
-            # if prediction == "Recyclable":
-            #     st.success("♻️ このゴミは **リサイクル可能** です！")
-                
-            # else:
-            #     st.error("🚮 このゴミは **リサイクル不可** です。")
-                
-            # # 確信度をパーセンテージで表示
-            # confidence = result['probability']      # 0.9876 などの float 値
-            # st.metric(label="判定の確信度", value=f"{confidence * 100:.1f}%")
-            # # リサイクル可能なら風船を飛ばす
-            # if prediction == "Recyclable":
-            #     # st.balloons() 
-            #     st.snow()
+            if "error" in result:
+                st.error(result["error"])
+            else:
+                prediction = result['prediction']  # ← ここで prediction を定義
+                confidence = result['probability']      # 0.9876 などの float 値
 
             # 背景色を判定に応じて切り替え
             bg_color = "#e6f4ea" if prediction == "Recyclable" else "#fdecea"
